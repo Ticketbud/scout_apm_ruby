@@ -53,11 +53,13 @@ module ScoutApm
       end
 
       def getDatabaseAdapter
-        if ActiveRecord::Base.respond_to?(:connection_config)
-          ActiveRecord::Base.connection_config[:adapter]
-        elsif ActiveRecord::Base.respond_to?(:configurations)
-          ActiveRecord::Base.configurations[env]["adapter"]
-        end
+        # textacular hates us
+        # if ActiveRecord::Base.respond_to?(:connection_config)
+        #   ActiveRecord::Base.connection_config[:adapter]
+        # elsif ActiveRecord::Base.respond_to?(:configurations)
+        #   ActiveRecord::Base.configurations[env]["adapter"]
+        # end
+        ActiveRecord::Base.configurations[env]["adapter"]
       rescue
         nil
       end
